@@ -1,3 +1,14 @@
+# Sample Authenticators
+
+The following are examples of authenticators thought to represent each of the authenticator types described in [SP 800-63B](https://doi.org/10.6028/NIST.SP.800-63b). This list describes only authenticators; it does not include authentication providers (either products or as-a-service) that support authenticators made by third parties.
+
+## Criteria for Inclusion
+
+If your resource or product is: publicly available (either free or offered for sale) and described on the internet, it meets the basic criteria for inclusion in the this document. If your resource or product qualifies and you would like it listed here, send a description of it to dig-comments@nist.gov.
+
+## Representations and Warranties
+
+Certain commercial entities, equipment, or materials may be identified in this document or linked websites in order to support deployment of authentication systems supporting NIST SP 800-63-3. Such identification is not intended to imply recommendation or endorsement by NIST, nor is it intended to imply that the entities, materials, or equipment are necessarily the best available for the purpose.
 
 
 | Authenticator Type | Example | Notes |
