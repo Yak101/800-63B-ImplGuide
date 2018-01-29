@@ -32,25 +32,23 @@ As noted in this section, it is possible for a subscriber to add an additional a
 
 ##### 6.1.2.3 Replacement of a Lost Authentication Factor
 
-In a perfect world, subscribers would never lose authenticators, or would have another authenticator of the same factor(s) available as a backup. However, in practice this happens with some regularity. It is often possible to bind additional physical authenticators to mitigate against loss of something you have, but it is considerably more difficult to recover from the common situation where a memorized secret has been forgotten. Backup memorized secrets are not a good response, because since they are rarely used, they would be even more frequently forgotten.
+In a perfect world, subscribers would never lose authenticators, or would have another authenticator of the same factor(s) available as a backup. However, in practice subscribers lose or damage authenticators with some regularity. It is often possible to bind additional physical authenticators to mitigate loss of something you have, but it is considerably more difficult to recover from the common situation where a memorized secret has been forgotten. Having a secondary memorized secret as a backup is not a good response, since this secondary secret would be rarely used and more likely to be forgotten.
 
 The most common and problematic situation is the loss of a memorized secret. A special provision is made for recovery in this case, involving the use of two physical authenticators and a recovery code that is sent by the CSP to the subscriber’s address of record. The recovery code serves as both notice to the subscriber and protection against an attacker that is able to steal two or more of the subscriber’s authenticators. While not fully two-factor, this procedure confirms the subscriber’s ability to receive messages at the address of record.
 
 #### 6.1.3 Binding to a Subscriber-provided Authenticator
 
-This section addresses issues with the binding of “bring your own” authenticators. As discussed above, the CSP needs some assurance as to the type and security of authenticators that are bound to the subscriber’s account. A default assumption of the weaker authenticator type (e.g., single-factor as opposed to multi-factor crypto device) should always be made.
+So-called “bring your own” authenticators, while desirable from a convenience and complexity point of view, introduce some new issues. As discussed above, the CSP needs some assurance as to the type and security of authenticators that are bound to the subscriber’s account. The CSP should always make a default assumption of the weaker authenticator type (e.g., single-factor as opposed to multi-factor crypto device, or software-based as opposed to hardware-based authenticator) when it is not able to reliably establish the nature of the authenticator. 
 
 #### 6.1.4 Renewal
 
-This is basically a reminder that the authenticator renewal process should begin well before the actual expiration of a previous authenticator. Lifetimes of physical authenticators should be chosen to balance the risk of the undetected loss of an authenticator and the cost and complexity of reissuance.
+The authenticator renewal process should begin well before the actual expiration of a previous authenticator. Lifetimes of physical authenticators should be chosen to balance the risk of the undetected loss of an authenticator and the cost and complexity of reissuance.
 
-This section should not be seen as conflicting with the earlier guideline that memorized secrets should not have routine expiration. Expiration of memorized secrets (without some other indication of a security breach having occurred) should be avoided because of the users to choose poor memorized secrets when they know they will need to replace them soon.
+Authenticator expiration should not be seen as conflicting with the earlier guideline that memorized secrets should not have routine expiration. Expiration of memorized secrets (without some other indication of a security breach having occurred) should be avoided because of the users to choose poor memorized secrets when they know they will need to replace them soon.
 
 ### 6.2 Loss, Theft, Damage, and Unauthorized Duplication
 
-This section provides more general guidance about the revocation of authenticators that are found to be no longer under the subscriber’s control. It supplements the more specific guidance for authenticators given in Section 5.
-
-The important issue here is to provide an effective means for reporting and requesting the suspension or revocation of an authenticator without creating a mechanism for denial-of-service attacks on the subscriber. Suspension gives the subscriber an opportunity to intervene before an authenticator is removed from the account entirely, thereby mitigating the severity of such denial-of-service attacks.
+The possibility of authenticator loss, theft, damage, and unauthorized duplication require that the CSP provide an effective means for reporting and requesting the suspension or revocation of an authenticator without creating a mechanism for denial-of-service attacks on the subscriber. Suspension gives the subscriber an opportunity to intervene before an authenticator is removed from the account entirely, thereby mitigating the severity of such denial-of-service attacks.
 
 ### 6.3 Expiration
 
@@ -60,7 +58,7 @@ As discussed above, routine expiration of memorized secrets is discouraged becau
 
 ### 6.4 Revocation and Termination
 
-This section complements the information in Sections 6.2 and 6.3 with more emphasis on the situation when a subject ceases to be a subscriber of a given CSP. Procedures used by specific CSPs, such as in FIPS 201 with respect to PIV credentials, supplements the information in this section.
+Revocation and termination address situations when a subject ceases to be a subscriber of a given CSP. Procedures used by specific CSPs, such as in FIPS 201 with respect to PIV credentials, supplement the information in this section.
 
-While the use of an authenticator by a specific CSP for online authentication is relatively easy to revoke, authenticators that contain user attributes or that can be used for physical authentication as well require much more emphasis on physical collection and destruction.
+While the use of an authenticator by a specific CSP for online authentication is relatively easy to revoke, authenticators that contain user attributes or that can be used for physical authentication require much more emphasis on physical collection and destruction. Relying parties that use information contained on such authenticators need to consider the possibility that those attributes are stale, and should verify the attributes with the CSP online when this is practical, depending on the sensitivity of the application.
 
