@@ -91,7 +91,7 @@ Unlike earlier editions of SP 800-63, SP 800-63B treats devices that are connect
 
 A number of readily-available commercial OTP products, both hardware and software, are available on the market. The Initiative for Open Authentication (OATH) is an industry consortium promoting the use of OTP authenticators.
 
-#### 5.1.5 Multi-Factor OTP Device
+#### 5.1.5 Multi-Factor OTP Devices
 
 Multi-Factor OTP Devices are similar to Single-Factor OTP devices, but require activation by input of a memorized secret or the successful presentation of a biometric in order to obtain a one-time password. A multi-factor OTP device is something you have and is activated by something you know or something you are.
 
