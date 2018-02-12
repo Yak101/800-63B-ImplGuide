@@ -17,8 +17,8 @@ The term memorized secret is an attempt to encompass passwords, passphrases, and
 One of the significant changes in SP 800-63B is a rethinking of the role of memorized secrets and minimization of their burden on subscribers. In accordance with Executive Order 13681 [EO 13681], transactions involving any significant risk, including any which involve the release of personal information, require multi-factor authentication. As a result, memorized secrets alone will be used only when a relatively low level of security is required.
 
 Research [find relevant Herley paper] has shown that there is a significant gap between the requirement for memorized secrets that must protect against an offline attack as compared with those that only protect against throttled online attacks. For memorized secrets to be considered secure against current offline attacks, a considerably higher minimum length would be required. Even so, there is no assurance that subscribers would pick memorized secrets that don’t lend themselves to automated guessing attacks. Accordingly, a two-pronged approach was adopted:
-•	Set minimum memorized secret requirements to protect against online attacks only, accept the risk of offline attacks, and throttle online attempts.
-•	Require verifiers to implement secure hashing of memorized secrets, including hashing with both a salt and a secret value.
+* Set minimum memorized secret requirements to protect against online attacks only, accept the risk of offline attacks, and throttle online attempts.
+* Require verifiers to implement secure hashing of memorized secrets, including iterated hashing with a salt, and recommend hashing with a secret value as well.
 
 This puts the burden on the verifier, rather than the subscriber, to the maximum extent possible.
 
@@ -34,7 +34,7 @@ When a subscriber attempts to choose a blacklisted memorized secret, it is helpf
 
 ##### 5.1.1.1 Examples
 
-As mentioned above, memorized secrets include passwords, passphrases, and PINs. The term passphrase is often used when the expectation is that the secret will be longer than a password, and when spaces may be included, but otherwise the terms are equivalent. PINs normally denote a numeric secret that is often randomly chosen by the CSP/verifier and assigned to the user. The length requirement for randomly chosen PINs is shorter than for user-chosen secrets because they would be expected to be uniformly distributed and therefore have more entropy than a user-chosen secret of the same length and composition.
+As mentioned above, memorized secrets include passwords, passphrases, and PINs. The term passphrase is often used when the expectation is that the secret will be longer than a password, and when spaces may be included, but otherwise the terms are equivalent. PINs normally denote a numeric secret that is often randomly chosen by the CSP/verifier and assigned to the user. The length requirement for randomly chosen PINs is shorter than for user-chosen secrets because they would be expected to be uniformly distributed and therefore have more entropy than a user-chosen secret of the same length and composition. CSP-chosen secrets may be used for memorized secrets other than PINs as well, although the length requirements for such secrets are the same as for user-chosen memorized secrets.
 
 #### 5.1.2 Look-up Secrets
 
@@ -42,7 +42,7 @@ Look-up secrets are secrets that are issued by the CSP to the subscriber each of
 
 The primary disadvantage of look-up secrets is that they can only be used for a specific number of authentications, after which a new set of look-up secrets needs to be issued to the subscriber. However, they are among the lowest-cost authenticators to issue. Issuance of look-up secrets can occur in person (typically at the end of an in-person identity proofing session), via postal mail, or in a mutually-authenticated protected session where the subscriber authentication also included something you have.
 
-Look-up secrets must, of course, be protected from disclosure. While storage requirements for look-up secrets are not specified in SP 800-63B, look-up secrets that are used as backup authenticators would normally be stored in a locked container on the subject’s premises. Issuance of look-up secrets should be accompanied by suitable advice on protecting the secrets, as well as procedures for revoking the secrets should they be lost or stolen.
+Look-up secrets must, of course, be protected from disclosure. While storage requirements for look-up secrets are not specified in SP 800-63B, look-up secrets that are used as backup authenticators would normally be stored in a locked container on the subject’s premises. Issuance of look-up secrets should be accompanied by suitable advice on protecting the secrets, as well as procedures for revoking the secrets should they be lost or stolen. As noted in SP 800-63B Section 5.1.2.1, look-up secrets may be issued online over a secure channel; this normally requires a mutually-authenticated session at AAL2 or higher. Non-secure mechanisms such as email are unsuitable for the distribution of look-up secrets.
 
 In some cases, look-up secrets are issued in a form suitable for the subscriber to carry with them, e.g., in a wallet. While something carried in a wallet is probably more likely to be lost or stolen, that theft or loss is more likely to be detected quickly. Accordingly, issuers of look-up secret authenticators that are designed to be carried should have procedures in place to allow rapid reporting and revocation of authenticators that are no longer under the subscriber’s control.
 
@@ -73,7 +73,7 @@ It should be noted that the authenticator is not required to be a physically sep
 
 The most common example of an out-of-band device is also a restricted authenticator: the use of SMS to a mobile telephone to send a random secret to the subscriber. Many security weaknesses with this have been identified, including SS7 (telephone signaling) vulnerabilities and the possibility of the telephone number being reassigned to a different device, perhaps by social engineering of a carrier or retail representative by an attacker.
 
-Some secure communications apps, such as Signal, create a fingerprint that changes if the device on which the app is running ever changes. This allows the verifier to securely detect a change in endpoint. Associated with the encrypted nature of the communications, this makes apps of this sort a fully acceptable alternative to the use of SMS.
+Some secure communications apps, such as Signal, create a fingerprint that changes if the device on which the app is running ever changes. This allows the verifier to securely detect a change in endpoint. The combination of strong device binding and the end-to-end encryption of the secondary channel permits the authentication secret to prove possession of a specific device, making this a fully acceptable alternative to the use of SMS.
 
 A verifier-specific application can also be used to terminate the user side of the secondary communication channel. This application would need to maintain a secret (probably a key pair) that it uses to authenticate to the verifier in accepting or providing the secret being exchanged.
 
@@ -85,7 +85,7 @@ Single-factor OTP devices that are not time-based generally operate based on the
 
 Time-based OTP devices maintain an internal clock that must be kept in relative synchronization with the verifier. This can be difficult because the OTP device, under control of the subscriber, may be expected to operate for several years despite being subjected to temperature changes contributing to clock drift. The verifier needs to consider possible clock drift in its determination whether to accept a given OTP value. These devices are usually shipped from manufacturers with their clocks pre-synchronized, and the manufacturer may provide a verification service for their use. As in any case when authentication is outsourced, verifiers need to consider the security practices of the manufacturer when assessing overall misauthentication risk.
 
-Because the authentication output for OTP devices is manually transferred from the OTP device to the application being authenticated, OTP devices are never considered verifier-impersonation resistant as described in SP 800-63B Section 5.2.5. The goal of verifier-impersonation resistance is to not depend on the claimant detecting a phishing attack, and an OTP authenticator cannot control where its output is entered.
+Unlike earlier editions of SP 800-63, SP 800-63B treats devices that are connected directly to the endpoint as crypto devices rather than as OTP devices, even if they only supply a one-time password. The authentication output for OTP devices is defined to be manually transferred from the OTP device to the application being authenticated. For this reason, OTP devices are never considered verifier-impersonation resistant as described in SP 800-63B Section 5.2.5. The goal of verifier-impersonation resistance is to not depend on the claimant detecting a phishing attack, and an OTP authenticator cannot control where its output is entered.
 
 ##### 5.1.4.1 Examples
 
@@ -99,7 +99,7 @@ Many of the same considerations associated with single-factor OTP devices apply 
 
 When the wrong memorized secret is entered, the authenticator can take one of two actions. One is to generate an intentionally-incorrect output; this allows the verifier to implement a throttling strategy to discourage guessing attacks on the memorized secret. Another possibility is to display an error indication on the device. This avoids the usability impact if the user mis-enters the secret, but requires that the authenticator implement the throttling strategy, which may be challenging on some devices.
 
-Because of the significant false reject rates associated with biometrics, the generation of an intentionally-incorrect output is likely to have a greater impact on devices activated by a biometric. In using biometric-activated OTP devices, the severe throttling requirements described in SP 800-63B Section 5.2.3 should be considered, and alternatives provided if the user is unable to successfully complete biometric authentication.
+Because of the significant false reject rates associated with biometrics, the generation of an intentionally-incorrect output is likely to have a greater impact on devices activated by a biometric. In using biometric-activated OTP devices, the severe throttling requirements described in SP 800-63B Section 5.2.3 should be considered, and alternatives provided if the user is unable to successfully complete biometric authentication. These alternatives could include the use of a memorized secret for activation, or use of a completely different authenticator.
 
 #### 5.1.6 Single-Factor Cryptographic Software
 
@@ -125,7 +125,7 @@ Single-factor cryptographic devices exist in a wide range of shapes and sizes. �
 
 Single-factor cryptographic devices may also be embedded in a user endpoint, such as in a hardware TPM in a user device. Cryptographic devices with wireless interfaces, particularly NFC, are also emerging and may prove popular, particularly for mobile devices that may lack USB and similar hardware interfaces.
 
-Some single-factor cryptographic devices operate in more than one mode, and it is important to consider the capabilities of the particular mode being used. For example, some authenticators that implement FIDO U2F, a challenge-response protocol that may be verifier impersonation resistant, also implement a legacy one-time password mode, which does not provide those capabilities.
+Some single-factor cryptographic devices operate in more than one mode, and it is important to consider the capabilities of the particular mode being used. For example, some authenticators that implement FIDO U2F (a challenge-response protocol that may be verifier impersonation resistant) also implement a legacy one-time password mode, which is not verifier impersonation resistant.
 
 #### 5.1.8 Multi-Factor Cryptographic Software
 
@@ -185,7 +185,7 @@ When multiple authentication factors are being used, it is sometimes possible to
 
 #### 5.2.3 Use of Biometrics
 
-Biometric authentication is a rapidly evolving area, and it is important to use biometrics consistent with actual measured performance characteristics. It is also important to work within the secrecy and revocability limitations of biometrics.
+Biometric authentication is a rapidly evolving area, and it is important to use biometrics consistent with actual measured performance characteristics. It is also important to work within the revocability and secrecy limitations of biometrics.
 
 One of the primary limitations of biometrics is that they cannot be revoked: it isn’t possible to change your fingerprint, iris pattern, or other modalities if your biometric becomes known to a potential attacker. This is addressed by the requirement that there be a strong binding between the biometric and a physical authenticator. A biometric is enrolled for use with a specific physical authenticator, and if there is a suspicion of misuse, it is the physical authenticator, not the biometric itself, that is revoked or suspended.
 
@@ -193,7 +193,7 @@ Biometrics are also not secret. High-resolution cameras have been shown to revea
 
 Current performance of biometric sensors and processing leads to the requirement of a false-match rate of 1 in 1000 or better. Furthermore, this rate is measured under conditions of a zero-effort attack: biometrics from random people being tested, without intentionally picking biometrics that are more likely to be accepted. Because this rate is significantly lower than authenticators like memorized secrets and OTPs, more restrictive throttling requirements have been adopted. Depending on whether PAD is implemented, throttling begins at 5-10 failed attempts, and increases exponentially after that. For this reason, an alternate modality, or the use of a memorized secret as the second factor, is probably required in most situations.
 
-Biometrics can be verified centrally, although increases in processor performance (e.g., in mobile devices) makes it increasingly practical to verify biometrics at the sensor. If central verification is performed, additional requirements about the security of the biometric data in transit and authentication of the sensor/endpoint are imposed.
+Biometrics can be verified centrally, although increases in processor performance (e.g., in mobile devices) makes it increasingly practical to verify biometrics at the sensor. If central verification is performed, additional requirements about the security of the biometric data in transit and authentication of the sensor/endpoint are imposed. In particular, use of a biometric is required to be tightly bound to specific device(s) for which the sensor and endpoint have been determined by the verifier to meet the required performance parameters.
 
 #### 5.2.4 Attestation
 
@@ -233,7 +233,7 @@ An authenticator output is considered replay resistant if its output can be used
 
 One of the concerns with embedded and directly-connected authenticators (typically cryptographic device authenticators) is the question of whether malware in the endpoint device that hosts the authenticator can cause authentication to occur without the subscriber’s knowledge or consent. In this situation, the malware could proxy authenticator challenges from the attacker if needed, and obtain the authenticator output needed to sign the attacker into a service of interest. In common use, some cryptographic authenticators are left connected for multiple authentications, and are subject to this concern.
 
-All authenticators that require claimant intervention establish authentication intent, provided that there is no caching of claimant input and that the intervention cannot be spoofed by software (e.g., by simulating keyboard input). In most cases, multifactor authenticators also establish intent unless claimant input is cached, although certain biometric modalities such as facial recognition may require additional measures to establish intent.
+All authenticators that require claimant intervention establish authentication intent, provided that there is no caching of claimant input and that the intervention cannot be spoofed by software (e.g., by simulating keyboard input). In most cases, multifactor authenticators also establish intent unless claimant input is cached, although certain biometric modalities such as facial recognition may require additional measures to establish intent. Caching of claimant input should be avoided because it weakens the establishment of intent.
 
 Authentication intent does not require that the claimant be authenticated in any way, only that someone has taken an action requesting authentication at the endpoint. This could be through the pressing of a button or the insertion or connection of an authenticator that is capable of only one authentication per insertion, for example.
 
