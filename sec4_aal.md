@@ -1,6 +1,6 @@
 ## 4 Authenticator Assurance Levels
 
-The following sections provide some further description of the authenticator assurance levels (AALs) and in particular how the particular authenticator combinations permitted at each AAL were arrived at. As with the rest of this implementation guide, these descriptions are only informative; refer to SP 800-63B for normative guidelines.
+The following sections provide some further description of the authenticator assurance levels (AALs) and in particular how the particular authenticator combinations permitted at each AAL were arrived at. As with the rest of these implementation resources, these descriptions are only informative; refer to SP 800-63B for normative guidelines.
 
 It is the intent of SP 800-63B to permit the use of a higher-AAL authenticator or combination of authenticators to authenticate a session at a lower AAL. While the user experience with a higher-AAL authenticator is often more complex, it is frequently more convenient not to maintain and use different authenticators for lower AAL(s).
 
@@ -20,7 +20,7 @@ AAL2 requires the use of two authenticator factors, either a physical authentica
 
 As detailed in Section 5.2.3 below, there are restrictions on the use of biometrics, in particular that they must be securely bound to a specific physical authenticator. For this reason, a memorized secret plus a biometric is not an acceptable combination for authentication.
 
-Multi-factor authenticators use an additional factor, either something you know or something you have, to unlock a secret that is stored in the (physical) authenticator. This introduces new challenges: How can the verifier determine that two factors were actually used in the authentication? How can the verifier determine that the use of a biometric factor to unlock the authenticator meets the AAL2 performance requirements? If the authenticator is supplied by the CSP (not a “bring your own” authenticator), the verifier of course can be assured that the authenticator meets AAL2 requirements by virtue of its trust relationship with the CSP. User-supplied authenticators that include some sort of attestation of its provenance, such as a certificate signed by the manufacturer, can generally be assumed to meet the specifications presented by that manufacturer. In the absence of this or a similar basis for the verifier to establish the nature of the authenticator, verifier should not assume that a (purported) multifactor authenticator meets AAL2 requirements.
+Multi-factor authenticators use an additional factor, either something you know or something you have, to unlock a secret that is stored in the (physical) authenticator. This introduces new challenges: How can the verifier determine that two factors were actually used in the authentication? How can the verifier determine that the use of a biometric factor to unlock the authenticator meets the AAL2 performance requirements? If the authenticator is supplied by the CSP (not a “bring your own” authenticator), the verifier of course can be assured that the authenticator meets AAL2 requirements by virtue of its trust relationship with the CSP. User-supplied authenticators that include some sort of attestation of its provenance, such as a certificate signed by the manufacturer, can generally be assumed to meet the specifications presented by that manufacturer. In the absence of this or a similar basis for the verifier to establish the nature of the authenticator, verifiers do not have a basis for assuming that a (purported) multifactor authenticator meets AAL2 requirements.
 
 ### 4.3 Authenticator Assurance Level 3
 
@@ -31,7 +31,7 @@ AAL3 introduces several new requirements beyond AAL2, the most significant being
 * Replay resistance
 * Authentication intent
 
-Some of these charactistics are satisfied jointly by the authenticator and verifier, while others are primarily authenticator characteristics. When multiple authenticators are used, these requirements are satisfied by the use of at least one authenticator with the required characteristic. For example, if a hardware-based authenticator that is not verifier impersonation resistant is used, a software-based authenticator that provides verifier impersonation resistance will satisfy that requirement.
+Some of these characteristics are satisfied jointly by the authenticator and verifier, while others are primarily authenticator characteristics. When multiple authenticators are used, these requirements are satisfied by the use of at least one authenticator with the required characteristic. For example, if a hardware-based authenticator that is not verifier impersonation resistant is used, a software-based authenticator that provides verifier impersonation resistance will satisfy that requirement.
 
 #### 4.3.1 Permitted Authenticator Types
 
