@@ -49,7 +49,7 @@ As mentioned above, memorized secrets include passwords, passphrases, and PINs. 
 <table style="width:100%">
   <tr>
     <td><img src="sp800-63b/media/Look-up-secrets.png" alt="authenticator" style="width: 100px;height: 100px;min-width:100px;min-height:100px;"/></td>
-    <td>Look-up secrets are secrets that are issued by the CSP to the subscriber each of which can be used for one successful authentication. They are considered something you have, the “something” being the printed or other media containing a set of these secrets. They are well-suited to use as a backup authenticator to be used when a primary authenticator is lost, stolen, or malfunctions.</td>
+    <td>Look-up secrets are secrets that are issued by the CSP to the subscriber each of which can be used for one successful authentication. They are considered <i>something you have</i>, the “something” being the printed or other media containing a set of these secrets. They are well-suited to use as a backup authenticator to be used when a primary authenticator is lost, stolen, or malfunctions.</td>
     </tr>
     </table>
     </div>
@@ -80,7 +80,7 @@ A third common example of a look-up secret authenticator is a secret grid. In th
     </table>
     </div>
 
-While there are many different implementations of out-of-band authenticators, it is important to remember that the primary objective is to establish that the claimant controls a specific device associated with the subscriber—that the claimant and subscriber are the same person. To the extent that devices can be substituted without re-enrollment or more than one device can be used for a given out-of-band authentication, the authenticator is weaker, or in some cases unsuitable for use. Accordingly, email services and telephony that terminates in a voice-over-IP (VoIP) endpoint are not acceptable for out-of-band authentication because these often can be received by more than one endpoint. If the registration of an out-of-band device is rejected because it is a VoIP endpoint, it is helpful to explain the rationale for this to the subscriber.
+While there are many different implementations of out-of-band authenticators, it is important to remember that the primary objective is to establish that the claimant controls a specific device associated with the subscriber—that the claimant and subscriber are the same person. To the extent that devices can be substituted without re-enrollment or more than one device can be used for a given out-of-band authentication, the authenticator is weaker, or in some cases unsuitable for use. Accordingly, (1) email services and (2) telephony that terminates in a voice-over-IP (VoIP) endpoint are not acceptable for out-of-band authentication because these often can be received by more than one endpoint. If the registration of an out-of-band device is rejected because it is a VoIP endpoint, it is helpful to explain the rationale for this to the subscriber.
 
 It is also important to ensure that the activity on the out-of-band device be associated with a specific session on the primary channel. The transfer or verification of a secret between the primary and secondary channels avoids the opportunity for an attacker with good timing to obtain authentication of a different session controlled by them.
 
@@ -186,7 +186,7 @@ Some single-factor cryptographic devices operate in more than one mode, and it i
 <table style="width:100%">
   <tr>
     <td><img src="sp800-63b/media/Multi-factor-software-crypto.png" alt="authenticator" style="width: 100px;height: 100px;min-width:100px;min-height:100px;"/></td>
-    <td>Multi-factor cryptographic software authenticators are similar to single-factor cryptographic software authenticators except that they require the input of a memorized secret in order to access the private key for authentication. Multi-factor cryptographic software authenticators are <i>something you have</i> plus <i>something you know</i>.
+    <td>Multi-factor cryptographic software authenticators are similar to single-factor cryptographic software authenticators except that they require the input of a memorized secret in order to access the private key for authentication. Multi-factor cryptographic software authenticators are <i>something you have</i> and are activated by <i>something you know</i>.
 </td>
     </tr>
     </table>
@@ -202,7 +202,7 @@ Note that since SP 800-63B Section 5.2.3 requires that biometrics be used as par
 <table style="width:100%">
   <tr>
     <td><img src="sp800-63b/media/Multi-factor-crypto-device.png" alt="authenticator" style="width: 100px;height: 100px;min-width:100px;min-height:100px;"/></td>
-    <td>Multi-factor cryptographic device authenticators are similar to single-factor cryptographic device authenticators except that they require activation by the entry of a memorized secret or verification of a biometric. Multi-factor cryptographic device authenticators are <i>something you have</i> plus either <i>something you know</i> or <i>something you are</i>.
+    <td>Multi-factor cryptographic device authenticators are similar to single-factor cryptographic device authenticators except that they require activation by the entry of a memorized secret or verification of a biometric. Multi-factor cryptographic device authenticators are <i>something you have</i> and are activated by either <i>something you know</i> or <i>something you are</i>.
 </td>
     </tr>
     </table>
